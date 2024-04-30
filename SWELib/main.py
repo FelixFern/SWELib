@@ -77,6 +77,8 @@ class SWE:
     def simulation(self, dir, chunked=False):
         if (chunked):
             file_path = f"{dir}/simulation_result-0.dat"
+        else:
+            file_path = dir
 
         with open(file_path, 'r') as file:
             data = file.read()
