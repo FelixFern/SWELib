@@ -153,11 +153,12 @@ class SWE:
             return
 
         Nx = self.get_computational_domain('Nx')
+        Nt = self.get_computational_domain('Nt')
         L = self.get_computational_domain('L')
         L_arr = np.linspace(0, L, Nx)
 
         plt.figure()
-        plt.plot(L_arr[:Nx], self.get_eta()[:Nx, t])
+        plt.plot(L_arr[:Nx], self.get_eta()[:Nx, int(t // Nt)])
         plt.xlabel('$x$')
         plt.title(f'$t={t}$')
         plt.grid()
@@ -172,11 +173,12 @@ class SWE:
             return
 
         Nt = self.get_computational_domain('Nt')
+        Nx = self.get_computational_domain('Nx')
         T = self.get_computational_domain('T')
         T_arr = np.linspace(0, T, Nt)
 
         plt.figure()
-        plt.plot(T_arr[:Nt], self.get_eta()[x, :Nt])
+        plt.plot(T_arr[:Nt], self.get_eta()[int(x // Nx), :Nt])
         plt.xlabel('t')
         plt.title(f'$x={x}$')
 
