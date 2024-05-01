@@ -159,7 +159,7 @@ class SWE:
         plt.figure()
         plt.plot(L_arr[:Nx], self.get_eta()[:Nx, t])
         plt.xlabel('$x$')
-        plt.title(f'$x={x}$')
+        plt.title(f'$t={t}$')
         plt.grid()
 
     def plot_across_time(self, x):

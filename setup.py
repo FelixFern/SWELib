@@ -5,7 +5,7 @@ with open("README.MD", "r") as f:
 
 setup(
     name="SWELib",
-    version="1.0.2",
+    version="1.0.3",
     packages=find_packages(),
     install_requires=[
         'numpy==1.23.5',
