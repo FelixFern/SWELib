@@ -1,3 +1,4 @@
 build
 dist
 SWELib.egg-info
+/.secret
