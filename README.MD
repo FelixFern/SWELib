@@ -7,4 +7,4 @@ This library is used to extract data and analyze exported wave simulation data b
 ## API Documentation
 Check out the documentation here
 
-(Documentation[https://simulwave.felixfern.me/swelib/getting-started]
+(Documentation)[https://simulwave.felixfern.me/swelib/getting-started]
