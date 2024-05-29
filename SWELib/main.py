@@ -291,7 +291,9 @@ class SWE:
             return self.renderer.get(val)
         return self.renderer
 
-    def export_bathymetry_from_array(self, array):
+
+class SWEUtil:
+    def export_bathymetry_from_array(array):
         bathymetry = {"bathymetry": [[j for j in i] for i in array]}
         file_path = 'bathymetry.dat'
 
@@ -300,7 +302,7 @@ class SWE:
 
         print(f'Bathymetry data has been written to {file_path}')
 
-    def export_init_eta_from_array(self, array):
+    def export_init_eta_from_array(array):
         init_eta = {"init_eta": [i for i in array]}
         file_path = 'init_eta.dat'
 
@@ -309,7 +311,7 @@ class SWE:
 
         print(f'Initial Eta data has been written to {file_path} ')
 
-    def export_init_u_from_array(self, array):
+    def export_init_u_from_array(array):
         init_u = {"init_u": [i for i in array]}
         file_path = 'init_u.dat'
 
@@ -318,7 +320,7 @@ class SWE:
 
         print(f'Initial u data has been written to {file_path} ')
 
-    def export_init_v_from_array(self, array):
+    def export_init_v_from_array(array):
         init_u = {"init_v": [i for i in array]}
         file_path = 'init_v.dat'
 
@@ -327,7 +329,7 @@ class SWE:
 
         print(f'Initial v data has been written to {file_path} ')
 
-    def export_init_u1_from_array(self, array):
+    def export_init_u1_from_array(array):
         init_u1 = {"init_u1": [i for i in array]}
         file_path = 'init_u1.dat'
 
@@ -336,7 +338,7 @@ class SWE:
 
         print(f'Initial u1 data has been written to {file_path} ')
 
-    def export_init_u2_from_array(self, array):
+    def export_init_u2_from_array(array):
         init_u2 = {"init_u2": [i for i in array]}
         file_path = 'init_u2.dat'
 
@@ -345,7 +347,7 @@ class SWE:
 
         print(f'Initial u2 data has been written to {file_path} ')
 
-    def export_boundary_u_l_from_array(self, array):
+    def export_boundary_u_l_from_array(array):
         boundary_2d = {"boundary_u_l": [
             i for i in [[j for j in i] for i in array]]}
         file_path = 'boundary_u_l.dat'
@@ -355,7 +357,7 @@ class SWE:
 
         print(f'Boundary u left data has been written to {file_path} ')
 
-    def export_boundary_u_r_from_array(self, array):
+    def export_boundary_u_r_from_array(array):
         boundary_2d = {"boundary_u_r": [i for i in array]}
         file_path = 'boundary_u_r.dat'
 
@@ -364,7 +366,7 @@ class SWE:
 
         print(f'Boundary u right data has been written to {file_path} ')
 
-    def export_boundary_u_f_from_array(self, array):
+    def export_boundary_u_f_from_array(array):
         boundary_2d = {"boundary_u_f": [i for i in array]}
         file_path = 'boundary_u_f.dat'
 
@@ -373,7 +375,7 @@ class SWE:
 
         print(f'Boundary u front data has been written to {file_path} ')
 
-    def export_boundary_u_b_from_array(self, array):
+    def export_boundary_u_b_from_array(array):
         boundary_2d = {"boundary_u_b": [i for i in array]}
         file_path = 'boundary_u_b.dat'
 
