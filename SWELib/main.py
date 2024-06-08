@@ -366,18 +366,18 @@ class SWEUtil:
 
         print(f'Boundary u right data has been written to {file_path} ')
 
-    def export_boundary_u_f_from_array(array):
+    def export_boundary_v_f_from_array(array):
         boundary_2d = {"boundary_u_f": [i for i in array]}
-        file_path = 'boundary_u_f.dat'
+        file_path = 'boundary_v_f.dat'
 
         with open(file_path, 'w') as file:
             json.dump(boundary_2d, file, indent=2)
 
         print(f'Boundary u front data has been written to {file_path} ')
 
-    def export_boundary_u_b_from_array(array):
+    def export_boundary_v_b_from_array(array):
         boundary_2d = {"boundary_u_b": [i for i in array]}
-        file_path = 'boundary_u_b.dat'
+        file_path = 'boundary_v_b.dat'
 
         with open(file_path, 'w') as file:
             json.dump(boundary_2d, file, indent=2)
