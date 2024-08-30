@@ -293,8 +293,12 @@ class SWE:
 
 
 class SWEUtil:
-    def export_bathymetry_from_array(array):
-        bathymetry = {"bathymetry": [[j for j in i] for i in array]}
+    def export_bathymetry_from_array(array, moving=False):
+        if (moving):
+            bathymetry = {"bathymetry": [[j for j in i] for i in array]}
+        else:
+            bathymetry = {"bathymetry": [i for i in array]}
+
         file_path = 'bathymetry.dat'
 
         with open(file_path, 'w') as file:
@@ -373,7 +377,7 @@ class SWEUtil:
         with open(file_path, 'w') as file:
             json.dump(boundary_2d, file, indent=2)
 
-        print(f'Boundary u front data has been written to {file_path} ')
+        print(f'Boundary v front data has been written to {file_path} ')
 
     def export_boundary_v_b_from_array(array):
         boundary_2d = {"boundary_u_b": [i for i in array]}
@@ -383,3 +387,21 @@ class SWEUtil:
             json.dump(boundary_2d, file, indent=2)
 
         print(f'Boundary u back data has been written to {file_path} ')
+
+    def export_cf0_from_array(array):
+        cf0 = {"cf0": [i for i in array]}
+        file_path = 'cf0.dat'
+
+        with open(file_path, 'w') as file:
+            json.dump(cf0_arr, file, indent=2)
+
+        print(f'cf0 array data has been written to {file_path} ')
+
+    def export_cf1_from_array(array):
+        cf1 = {"cf1": [i for i in array]}
+        file_path = 'cf1.dat'
+
+        with open(file_path, 'w') as file:
+            json.dump(cf1, file, indent=2)
+
+        print(f'cf1 array data has been written to {file_path} ')
