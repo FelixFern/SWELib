@@ -6,12 +6,6 @@ This library is used to extract data and analyze exported wave simulation data b
 
 ## API Documentation
 
-Check out the documentation here (currently work in progress)
+Check out the documentation here
 
 [Documentation](https://simulwave.felixfern.me/swelib/getting-started)
-
-## Changelog
-
-### 1.0
-
-- Initial Release.
