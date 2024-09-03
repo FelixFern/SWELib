@@ -393,7 +393,7 @@ class SWEUtil:
         file_path = 'cf0.dat'
 
         with open(file_path, 'w') as file:
-            json.dump(cf0_arr, file, indent=2)
+            json.dump(cf0, file, indent=2)
 
         print(f'cf0 array data has been written to {file_path} ')
 
