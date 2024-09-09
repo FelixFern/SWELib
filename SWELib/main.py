@@ -293,8 +293,8 @@ class SWE:
 
 
 class SWEUtil:
-    def export_bathymetry_from_array(array, moving=False):
-        if (moving):
+    def export_bathymetry_from_array(array, is_2d=False):
+        if (is_2d):
             bathymetry = {"bathymetry": [[j for j in i] for i in array]}
         else:
             bathymetry = {"bathymetry": [i for i in array]}
@@ -306,8 +306,12 @@ class SWEUtil:
 
         print(f'Bathymetry data has been written to {file_path}')
 
-    def export_init_eta_from_array(array):
-        init_eta = {"init_eta": [i for i in array]}
+    def export_init_eta_from_array(array, is_2d=False):
+        if (is_2d):
+            init_eta = {"init_eta": [[j for j in i] for i in array]}
+        else:
+            init_eta = {"init_eta": [i for i in array]}
+
         file_path = 'init_eta.dat'
 
         with open(file_path, 'w') as file:
