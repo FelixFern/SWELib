@@ -65,6 +65,35 @@ def animate_1d(x_lim, y_lim, L_arr, eta, Nt, bottom=np.array([]), moving_seabed=
     return HTML(animation.to_jshtml())
 
 
+def animate_2d(x_lim, y_lim, eta, Lx_arr, Ly_arr, Nt, bottom=np.array([]), moving_seabed=False):
+    fig, ax = plt.subplots()
+    ax.set_xlim(x_lim[0], x_lim[1])
+    ax.set_ylim(y_lim[0], y_lim[1])
+
+    # Create the heatmap
+    heatmap = ax.imshow(eta[:, :, 0], extent=[Lx_arr[0], Lx_arr[-1],
+                        Ly_arr[0], Ly_arr[-1]], origin='lower', cmap='cool_r', aspect='auto')
+    cbar = plt.colorbar(heatmap)
+    cbar.set_label('Wave Height')
+
+    if bottom.size > 0:
+        ax.contour(Lx_arr, Ly_arr, -bottom, colors='black')
+
+    def init():
+        heatmap.set_data(eta[:, :, 0])
+        return heatmap,
+
+    def update(frame):
+        heatmap.set_data(eta[:, :, frame])
+        return heatmap,
+
+    animation = FuncAnimation(fig, update, frames=Nt,
+                              init_func=init, blit=True)
+
+    plt.close()
+    return HTML(animation.to_jshtml())
+
+
 class SWE:
     def __init__(self):
         self.type = ''
@@ -92,9 +121,19 @@ class SWE:
                 combined_data = []
                 next_chunk = parsed_data.get('next_chunk')
 
+                print(f'Reading chunk 0')
+                print(">>", file_path)
+
+                with open(file_path, 'r') as file:
+                    json_data = json.load(file)
+                    data_chunk = json_data["output"]["eta"]
+                    next_chunk = json_data["next_chunk"]
+
+                combined_data.append(data_chunk)
+
                 while next_chunk is not None:
-                    # Load the data from the chunk file
                     print(f'Reading chunk {next_chunk}')
+                    print(">>", file_path)
 
                     file_path = f"{dir}/simulation_result-{next_chunk}.dat"
                     with open(file_path, 'r') as file:
@@ -102,7 +141,6 @@ class SWE:
                         data_chunk = json_data["output"]["eta"]
                         next_chunk = json_data["next_chunk"]
 
-                    # Append the chunk data to the combined data list
                     combined_data.append(data_chunk)
 
                 final_shape = (
@@ -122,8 +160,8 @@ class SWE:
                     for x_index, x_data in enumerate(chunk_data):
                         for y_index, y_data in enumerate(x_data):
                             for t_index, t_value in enumerate(y_data):
-                                original_data[x_index,
-                                              y_index, chunk * 250 + t_index] = t_value
+                                original_data[x_index, y_index,
+                                              chunk * 250 + t_index] = t_value
 
                 print('Simulation loaded successfully')
                 self.output = {
@@ -250,7 +288,7 @@ class SWE:
         plt.xlabel('t')
         plt.title(f'$x={x}, y={y}$')
 
-    def generate_animation_2d(self, plane, at, z_lim, Nt):
+    def generate_animation_2d_plane(self, plane, at, z_lim, Nt):
         if (self.type == '1d'):
             print('Please use generate_animation instead')
             return
@@ -270,6 +308,21 @@ class SWE:
 
             return animate_1d([horizontal_axis[0], horizontal_axis[-1]], z_lim, horizontal_axis, self.get_eta()[at, :Ny, :Nt],
                               Nt)
+
+    def generate_animation_2d(self, Nt):
+        if (self.type == '1d'):
+            print('Please use generate_animation instead')
+            return
+
+        L = self.get_computational_domain('L')
+        Nx = self.get_computational_domain('Nx')
+        M = self.get_computational_domain('M')
+        Ny = self.get_computational_domain('Ny')
+
+        L_arr = np.linspace(0, L, Nx)
+        M_arr = np.linspace(0, L, Ny)
+
+        return animate_2d([0, L], [0, M], self.get_eta(), L_arr, M_arr, Nt)
 
     def get_computational_domain(self, val: ComputationalDomain = None):
         if (val):
